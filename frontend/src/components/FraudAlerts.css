@@ -1,0 +1,390 @@
+/* ── Root ────────────────────────────────────────── */
+.fa-root { display: flex; flex-direction: column; gap: 14px; }
+
+/* ── Header ──────────────────────────────────────── */
+.fa-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.fa-eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fb923c;
+  margin-bottom: 4px;
+  opacity: 0.8;
+}
+
+.fa-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.fa-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ── Sort tabs ───────────────────────────────────── */
+.fa-sort-tabs { display: flex; border: 1px solid var(--border); }
+
+.fa-sort-btn {
+  background: none;
+  border: none;
+  border-right: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 5px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.fa-sort-btn:last-child  { border-right: none; }
+.fa-sort-btn.active      { background: #fb923c; color: var(--bg-primary); }
+.fa-sort-btn:not(.active):hover { background: var(--bg-secondary); color: var(--text-primary); }
+
+/* ── Refresh button ──────────────────────────────── */
+.fa-refresh-btn {
+  background: none;
+  border: 1px solid var(--border-bright);
+  color: var(--text-secondary);
+  padding: 5px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.fa-refresh-btn:hover    { border-color: #fb923c; color: #fb923c; }
+.fa-refresh-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ── Summary bar ─────────────────────────────────── */
+.fa-summary-bar {
+  display: flex;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 14px 20px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.fa-sum-stat { display: flex; flex-direction: column; gap: 3px; min-width: 80px; }
+
+.fa-sum-val {
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.fa-sum-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.fa-sum-divider {
+  width: 1px;
+  height: 36px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+.fa-sev-breakdown {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: auto;
+}
+
+.fa-sev-chip {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+/* ── Filters ─────────────────────────────────────── */
+.fa-filters { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.fa-filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 5px 12px;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.fa-filter-btn:hover  { border-color: var(--border-bright); color: var(--text-primary); }
+.fa-filter-btn.active { border-color: #fb923c; color: #fb923c; }
+
+/* ── Alert card ──────────────────────────────────── */
+.fa-list { display: flex; flex-direction: column; gap: 4px; }
+
+.fa-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--border);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.fa-card:hover { background: var(--bg-secondary); }
+
+.fa-card-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  gap: 12px;
+}
+
+.fa-card-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.fa-card-rank {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  min-width: 24px;
+  flex-shrink: 0;
+}
+
+.fa-cat-icon {
+  font-size: 1.2rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.fa-card-meta { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+
+.fa-card-category {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fa-card-desc {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 260px;
+}
+
+.fa-card-date {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.fa-card-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.fa-card-amount {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #f87171;
+  white-space: nowrap;
+}
+
+/* ── Severity badge ──────────────────────────────── */
+.fa-sev-badge {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 3px 8px;
+  border: 1px solid;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Score bar ───────────────────────────────────── */
+.fa-score-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 80px;
+}
+
+.fa-score-bar-track { flex: 1; height: 4px; background: var(--border); overflow: hidden; }
+.fa-score-bar-fill  { height: 100%; transition: width 0.4s ease; }
+.fa-score-num       { font-family: var(--font-mono); font-size: 0.62rem; min-width: 36px; text-align: right; }
+
+/* ── Expand button ───────────────────────────────── */
+.fa-expand-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  width: 24px; height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color 0.15s, color 0.15s;
+}
+.fa-expand-btn:hover { border-color: var(--border-bright); color: var(--text-primary); }
+
+/* ── Detail panel ────────────────────────────────── */
+.fa-card-detail {
+  border-top: 1px solid var(--border);
+  padding: 12px 16px 14px;
+  background: var(--bg-secondary);
+}
+
+.fa-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.fa-detail-item { display: flex; flex-direction: column; gap: 4px; }
+
+.fa-di-key {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.fa-di-val {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.fa-di-reason {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Error ───────────────────────────────────────── */
+.fa-error {
+  background: rgba(248,113,113,0.08);
+  border: 1px solid rgba(248,113,113,0.25);
+  color: #f87171;
+  padding: 12px 16px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Loading ─────────────────────────────────────── */
+.fa-loading { display: flex; flex-direction: column; gap: 6px; }
+
+.fa-skeleton {
+  height: 62px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  animation: faPulse 1.4s ease infinite;
+}
+
+.fa-loading-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-align: center;
+  padding-top: 4px;
+}
+
+@keyframes faPulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.85; }
+}
+
+/* ── Clean state ─────────────────────────────────── */
+.fa-clean {
+  text-align: center;
+  padding: 40px 20px;
+  border: 1px solid rgba(0,229,160,0.2);
+  background: rgba(0,229,160,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fa-clean-icon { font-size: 2rem; }
+.fa-clean p    { font-size: 0.9rem; color: var(--text-primary); font-weight: 600; }
+.fa-clean-sub  { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); letter-spacing: 0.06em; }
+
+/* ── Empty state ─────────────────────────────────── */
+.fa-empty {
+  text-align: center;
+  padding: 48px 20px;
+  border: 1px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fa-empty-icon { font-size: 2rem; display: block; }
+.fa-empty p    { font-size: 0.88rem; color: var(--text-secondary); }
+.fa-empty-sub  { font-family: var(--font-mono); font-size: 0.63rem; color: var(--text-muted); letter-spacing: 0.06em; }
+
+/* ── Responsive ──────────────────────────────────── */
+@media (max-width: 640px) {
+  .fa-card-right     { gap: 8px; }
+  .fa-score-bar-wrap { display: none; }
+  .fa-card-desc      { display: none; }
+  .fa-sev-breakdown  { display: none; }
+  .fa-sum-divider    { display: none; }
+}

@@ -1,0 +1,33 @@
+/* Analytics section responsive breakpoints */
+
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+/* Tablet: stack cards to a single column */
+@media (max-width: 1024px) {
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile: centered content, tighter padding */
+@media (max-width: 640px) {
+  .analytics-section {
+    padding: 1.25rem 1rem 2rem !important;
+  }
+  .analytics-grid {
+    gap: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

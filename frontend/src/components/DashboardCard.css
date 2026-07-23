@@ -1,0 +1,71 @@
+.dc-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 22px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+.dc-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--accent-green);
+  opacity: 0.7;
+}
+.dc-card.green::before { background: var(--accent-green); }
+.dc-card.red::before   { background: #f87171; }
+.dc-card.blue::before  { background: var(--accent-blue); }
+.dc-card.amber::before { background: var(--accent-amber); }
+
+.dc-card:hover {
+  border-color: var(--border-bright);
+  transform: translateY(-2px);
+}
+
+.dc-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.dc-value {
+  font-family: var(--font-mono);
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.dc-card.green .dc-value { color: var(--accent-green); }
+.dc-card.red   .dc-value { color: #f87171; }
+.dc-card.blue  .dc-value { color: var(--accent-blue); }
+.dc-card.amber .dc-value { color: var(--accent-amber); }
+
+.dc-sub {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.dc-skeleton {
+  display: block;
+  height: 1.7rem;
+  width: 70%;
+  background: var(--border);
+  animation: dcPulse 1.4s ease infinite;
+}
+
+@keyframes dcPulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.9; }
+}

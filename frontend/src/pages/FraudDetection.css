@@ -1,0 +1,389 @@
+.fd-page { min-height: 100vh; }
+
+.fd-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 28px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Page header ─────────────────────────────────── */
+.fd-page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.fd-eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fb923c;
+  margin-bottom: 8px;
+}
+
+.fd-heading {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 6px;
+}
+
+.fd-subtitle {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  max-width: 520px;
+  line-height: 1.65;
+}
+
+.fd-header-links { display: flex; gap: 16px; align-items: center; }
+
+.fd-hlink {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.fd-hlink:hover { color: #fb923c; }
+
+/* ── Status banners ──────────────────────────────── */
+.fd-status-warn {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: rgba(251, 146, 60, 0.07);
+  border: 1px solid rgba(251, 146, 60, 0.3);
+  padding: 14px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #fb923c;
+  line-height: 1.6;
+}
+
+.fd-code {
+  display: inline-block;
+  margin-left: 8px;
+  background: rgba(251, 146, 60, 0.1);
+  border: 1px solid rgba(251, 146, 60, 0.25);
+  padding: 1px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
+.fd-status-ok {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--accent-green);
+  border: 1px solid rgba(0, 229, 160, 0.2);
+  background: rgba(0, 229, 160, 0.05);
+  padding: 8px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+}
+
+/* ── Controls + model row ────────────────────────── */
+.fd-controls-row {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 16px;
+  align-items: start;
+}
+
+/* ── Controls panel ──────────────────────────────── */
+.fd-controls-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fd-cp-eye {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fb923c;
+  margin-bottom: 2px;
+  opacity: 0.8;
+}
+
+.fd-cp-title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.fd-ctrl-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.fd-ctrl-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fd-ctrl-field label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.fd-ctrl-field select {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  padding: 9px 12px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%233d5a69'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+.fd-ctrl-field select:focus { border-color: #fb923c; }
+
+/* ── Scan button ─────────────────────────────────── */
+.fd-scan-btn {
+  background: #fb923c;
+  border: none;
+  color: var(--bg-primary);
+  padding: 13px 20px;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: opacity 0.2s;
+}
+.fd-scan-btn:disabled             { opacity: 0.5; cursor: not-allowed; }
+.fd-scan-btn:hover:not(:disabled) { opacity: 0.88; }
+
+.fd-spinner {
+  width: 14px; height: 14px;
+  border: 2px solid rgba(0,0,0,0.2);
+  border-top-color: var(--bg-primary);
+  border-radius: 50%;
+  animation: fdSpin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes fdSpin { to { transform: rotate(360deg); } }
+
+.fd-scan-meta {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── Model info panel ────────────────────────────── */
+.fd-model-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fd-mp-title {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fb923c;
+  opacity: 0.8;
+}
+
+.fd-mp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.fd-mp-item { display: flex; flex-direction: column; gap: 3px; }
+
+.fd-mp-key {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.fd-mp-val {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #fb923c;
+}
+
+.fd-mp-features { display: flex; flex-wrap: wrap; gap: 5px; }
+
+.fd-mp-feat-title {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.fd-mp-feat {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  padding: 2px 7px;
+  letter-spacing: 0.04em;
+}
+
+/* ── Charts row ──────────────────────────────────── */
+.fd-charts-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.fd-chart-card {
+  background: var(--bg-card);
+  padding: 20px 22px;
+}
+
+.fd-cc-eye {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fb923c;
+  opacity: 0.7;
+  margin-bottom: 3px;
+}
+
+.fd-cc-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
+}
+
+/* ── Alerts wrap ─────────────────────────────────── */
+.fd-alerts-wrap {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 24px;
+}
+
+/* ── Explainer ───────────────────────────────────── */
+.fd-explainer {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 24px;
+}
+
+.fd-exp-eye {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fb923c;
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+.fd-exp-title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+}
+
+.fd-exp-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+}
+
+.fd-exp-item {
+  background: var(--bg-secondary);
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fd-exp-num {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--border-bright);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.fd-exp-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.fd-exp-desc {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  letter-spacing: 0.02em;
+}
+
+/* ── Responsive ──────────────────────────────────── */
+@media (max-width: 1000px) {
+  .fd-controls-row { grid-template-columns: 1fr; }
+  .fd-exp-grid     { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 700px) {
+  .fd-charts-row { grid-template-columns: 1fr; }
+  .fd-ctrl-grid  { grid-template-columns: 1fr; }
+  .fd-exp-grid   { grid-template-columns: 1fr; }
+  .fd-mp-grid    { grid-template-columns: repeat(2, 1fr); }
+  .fd-inner      { padding: 90px 16px 60px; gap: 18px; }
+}

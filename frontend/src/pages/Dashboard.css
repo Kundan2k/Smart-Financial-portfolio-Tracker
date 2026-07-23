@@ -1,0 +1,154 @@
+.db-page { min-height: 100vh; }
+
+.db-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 28px 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ── Page header ─────────────────────────────── */
+.db-page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.db-eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-green);
+  margin-bottom: 8px;
+}
+
+.db-heading {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 4px;
+}
+
+.db-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.db-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* ── Year tabs ───────────────────────────────── */
+.db-year-tabs {
+  display: flex;
+  border: 1px solid var(--border);
+}
+
+.db-year-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  padding: 7px 16px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  border-right: 1px solid var(--border);
+}
+
+.db-year-btn:last-child { border-right: none; }
+
+.db-year-btn.active {
+  background: var(--accent-green);
+  color: var(--bg-primary);
+}
+
+.db-year-btn:not(.active):hover { background: var(--bg-secondary); color: var(--text-primary); }
+
+.db-add-link {
+  display: inline-block;
+  background: transparent;
+  border: 1px solid var(--border-bright);
+  color: var(--text-secondary);
+  padding: 7px 16px;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.db-add-link:hover { border-color: var(--accent-green); color: var(--accent-green); }
+
+/* ── Error banner ────────────────────────────── */
+.db-error {
+  background: rgba(248, 113, 113, 0.08);
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  color: #f87171;
+  padding: 12px 16px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+/* ── Cards grid — 6 up ───────────────────────── */
+.db-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+/* ── Charts row ──────────────────────────────── */
+.db-charts-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+/* ── Footer links ────────────────────────────── */
+.db-footer-links {
+  display: flex;
+  gap: 28px;
+  padding-top: 4px;
+}
+
+.db-footer-link {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 0;
+}
+
+.db-footer-link:hover { color: var(--accent-green); }
+
+/* ── Responsive ──────────────────────────────── */
+@media (max-width: 900px) {
+  .db-cards-grid  { grid-template-columns: repeat(2, 1fr); }
+  .db-charts-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 540px) {
+  .db-cards-grid { grid-template-columns: 1fr; }
+  .db-inner { padding: 88px 16px 60px; gap: 20px; }
+}

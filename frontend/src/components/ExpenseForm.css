@@ -1,0 +1,256 @@
+/* ── Backdrop ────────────────────────────────── */
+.ef-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 12, 15, 0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 20px;
+}
+
+/* ── Modal ───────────────────────────────────── */
+.ef-modal {
+  background: var(--bg-card);
+  border: 1px solid var(--border-bright);
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.25s ease both;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Header ──────────────────────────────────── */
+.ef-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 28px 28px 0;
+}
+
+.ef-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-green);
+  margin-bottom: 6px;
+}
+
+.ef-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.ef-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.2s;
+  line-height: 1;
+}
+.ef-close:hover { color: var(--text-primary); }
+
+/* ── API error ───────────────────────────────── */
+.ef-api-error {
+  margin: 16px 28px 0;
+  background: rgba(248, 113, 113, 0.08);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  color: #f87171;
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+/* ── Form ────────────────────────────────────── */
+.ef-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px 28px 28px;
+}
+
+/* ── Type toggle ─────────────────────────────── */
+.ef-type-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+}
+
+.ef-type-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  padding: 10px;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.ef-type-btn.active.expense {
+  background: rgba(248, 113, 113, 0.12);
+  color: #f87171;
+}
+
+.ef-type-btn.active.income {
+  background: rgba(0, 229, 160, 0.1);
+  color: var(--accent-green);
+}
+
+/* ── Fields ──────────────────────────────────── */
+.ef-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ef-field label {
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.ef-optional {
+  color: var(--text-muted);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.62rem;
+}
+
+.ef-field input[type="text"],
+.ef-field input[type="date"],
+.ef-field input[type="number"] {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  padding: 11px 14px;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+
+.ef-field input:focus { border-color: var(--accent-green); }
+.ef-field input.error { border-color: #f87171; }
+
+.ef-err {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #f87171;
+}
+
+/* ── Amount wrap ─────────────────────────────── */
+.ef-amount-wrap {
+  position: relative;
+}
+
+.ef-currency {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.ef-amount-wrap input {
+  padding-left: 30px !important;
+  font-size: 1.2rem !important;
+}
+
+/* ── Category grid ───────────────────────────── */
+.ef-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.ef-cat-btn {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 8px 4px;
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.ef-cat-btn:hover {
+  border-color: var(--border-bright);
+  color: var(--text-primary);
+}
+
+.ef-cat-btn.active {
+  border-color: var(--accent-green);
+  background: rgba(0, 229, 160, 0.08);
+  color: var(--accent-green);
+}
+
+.ef-cat-icon { font-size: 1.1rem; }
+.ef-cat-name { text-align: center; line-height: 1.2; }
+
+/* ── Actions ─────────────────────────────────── */
+.ef-actions {
+  display: flex;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+.ef-btn-cancel {
+  flex: 1;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 12px;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.ef-btn-cancel:hover { border-color: var(--border-bright); color: var(--text-primary); }
+
+.ef-btn-save {
+  flex: 2;
+  background: var(--accent-green);
+  border: none;
+  color: var(--bg-primary);
+  padding: 12px;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.ef-btn-save:disabled { opacity: 0.55; cursor: not-allowed; }
+.ef-btn-save:hover:not(:disabled) { opacity: 0.88; }

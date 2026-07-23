@@ -1,0 +1,120 @@
+.cst-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 24px;
+}
+
+.cst-header { margin-bottom: 20px; }
+
+.cst-eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-green);
+  margin-bottom: 4px;
+  opacity: 0.7;
+}
+
+.cst-title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+/* ── Rows ────────────────────────────────────── */
+.cst-rows { display: flex; flex-direction: column; gap: 14px; }
+
+.cst-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.cst-rank {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  min-width: 22px;
+  padding-top: 2px;
+}
+
+.cst-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+  padding-top: 1px;
+  flex-shrink: 0;
+}
+
+.cst-meta { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+
+.cst-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cst-cat {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cst-amount {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: #f87171;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cst-bar-track {
+  height: 3px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.cst-bar-fill {
+  height: 100%;
+  background: var(--accent-green);
+  transition: width 0.6s ease;
+}
+
+.cst-pct {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+/* ── Skeleton ────────────────────────────────── */
+.cst-skeleton {
+  height: 52px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  animation: cstPulse 1.4s ease infinite;
+}
+
+@keyframes cstPulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.85; }
+}
+
+/* ── Empty ───────────────────────────────────── */
+.cst-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  border: 1px dashed var(--border);
+}
