@@ -1,35 +1,67 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from contextlib import asynccontextmanager
 import os
+import logging
 
 from config import settings
 from db import check_db_connection
 from db.database import Base, engine
-from models import User, Transaction, Investment  # noqa: F401
-from routers import (
-    portfolio_router, auth_router,
-    expenses_router,  analytics_router,
-    investments_router, ml_router,
-    fraud_router,
-)
 
-# Only initialize database if DATABASE_URL is properly set
-if settings.DATABASE_URL and settings.DATABASE_URL != "sqlite:///./test.db":
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Import models to register them
+try:
+    from models import User, Transaction, Investment  # noqa: F401
+except Exception as e:
+    logger.warning(f"Could not import models: {e}")
+
+# Import routers
+try:
+    from routers import (
+        portfolio_router, auth_router,
+        expenses_router, analytics_router,
+        investments_router, ml_router,
+        fraud_router,
+    )
+except Exception as e:
+    logger.warning(f"Could not import routers: {e}")
+    portfolio_router = auth_router = expenses_router = None
+    analytics_router = investments_router = ml_router = None
+    fraud_router = None
+
+# Initialize database tables (with error handling)
+def init_db():
+    """Initialize database tables safely."""
     try:
-        Base.metadata.create_all(bind=engine)
+        if settings.DATABASE_URL and settings.DATABASE_URL != "sqlite:///./test.db":
+            logger.info("Initializing PostgreSQL database...")
+            Base.metadata.create_all(bind=engine)
+            logger.info("Database initialized successfully")
+        else:
+            logger.info("Using SQLite database")
+            Base.metadata.create_all(bind=engine)
     except Exception as e:
-        print(f"Warning: Could not initialize database: {e}")
-else:
-    # For development/testing with SQLite
-    try:
-        Base.metadata.create_all(bind=engine)
-    except Exception as e:
-        print(f"Warning: Could not initialize SQLite database: {e}")
+        logger.warning(f"Could not initialize database: {e}")
+        logger.warning("Continuing without database initialization...")
+
+# Startup event
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    logger.info("Application starting up...")
+    init_db()
+    yield
+    # Shutdown
+    logger.info("Application shutting down...")
 
 app = FastAPI(
     title="Portfolio Tracker API",
     description="Smart Financial Portfolio Tracker — Phase 7",
     version="0.7.0",
+    lifespan=lifespan,
 )
 
 # CORS configuration - supports both local development and production
@@ -58,18 +90,36 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(auth_router,        prefix="/api")
-app.include_router(expenses_router,    prefix="/api")
-app.include_router(analytics_router,   prefix="/api")
-app.include_router(investments_router, prefix="/api")
-app.include_router(ml_router,          prefix="/api")
-app.include_router(fraud_router,       prefix="/api")
-app.include_router(portfolio_router,   prefix="/api")
+# Register routers safely
+try:
+    if auth_router:
+        app.include_router(auth_router, prefix="/api")
+    if expenses_router:
+        app.include_router(expenses_router, prefix="/api")
+    if analytics_router:
+        app.include_router(analytics_router, prefix="/api")
+    if investments_router:
+        app.include_router(investments_router, prefix="/api")
+    if ml_router:
+        app.include_router(ml_router, prefix="/api")
+    if fraud_router:
+        app.include_router(fraud_router, prefix="/api")
+    if portfolio_router:
+        app.include_router(portfolio_router, prefix="/api")
+    logger.info("All routers registered successfully")
+except Exception as e:
+    logger.warning(f"Could not register some routers: {e}")
 
 
 @app.get("/api/health", tags=["health"])
 def health_check():
-    db_ok = check_db_connection()
+    """Health check endpoint - minimal database dependency."""
+    try:
+        db_ok = check_db_connection()
+    except Exception as e:
+        logger.warning(f"Health check database error: {e}")
+        db_ok = False
+    
     return {
         "status": "ok",
         "environment": settings.ENVIRONMENT,
@@ -79,4 +129,5 @@ def health_check():
 
 @app.get("/", tags=["root"])
 def root():
+    """Root endpoint - no database dependency."""
     return {"message": "Portfolio Tracker API is running 🚀"}

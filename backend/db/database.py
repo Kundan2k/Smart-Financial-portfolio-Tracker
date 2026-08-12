@@ -1,26 +1,41 @@
 from sqlalchemy import create_engine, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.pool import NullPool, QueuePool
+from sqlalchemy.pool import NullPool, QueuePool, StaticPool
 from config import settings
 import os
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Determine which connection pool to use
-# For serverless (Vercel), use NullPool to avoid connection pooling issues
 ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
-USE_NULLPOOL = ENVIRONMENT == "production" and settings.DATABASE_URL.startswith("postgresql")
+DATABASE_URL = settings.DATABASE_URL
 
-if USE_NULLPOOL:
-    # Serverless-friendly: no connection pooling
+# Use appropriate pool for environment
+if "sqlite://" in DATABASE_URL or DATABASE_URL.startswith("sqlite:"):
+    # SQLite uses StaticPool for in-memory databases
+    logger.info(f"Using SQLite database: {DATABASE_URL}")
     engine = create_engine(
-        settings.DATABASE_URL,
-        poolclass=NullPool,
+        DATABASE_URL,
+        connect_args={"check_same_thread": False},
+        poolclass=StaticPool if ":memory:" in DATABASE_URL else QueuePool,
         echo=False,
     )
-else:
-    # Development or SQLite
+elif ENVIRONMENT == "production":
+    # Serverless (Vercel) uses NullPool for PostgreSQL
+    logger.info(f"Using PostgreSQL with NullPool for serverless")
     engine = create_engine(
-        settings.DATABASE_URL,
+        DATABASE_URL,
+        poolclass=NullPool,
+        echo=False,
+        connect_args={"connect_timeout": 5},
+    )
+else:
+    # Development uses QueuePool
+    logger.info(f"Using {DATABASE_URL.split('://')[0]} with QueuePool for development")
+    engine = create_engine(
+        DATABASE_URL,
         pool_pre_ping=True,
         pool_size=5,
         max_overflow=10,
@@ -46,6 +61,8 @@ def check_db_connection() -> bool:
     try:
         with engine.connect() as conn:
             conn.execute(text("SELECT 1"))
+        logger.debug("Database connection successful")
         return True
-    except Exception:
+    except Exception as e:
+        logger.warning(f"Database connection failed: {e}")
         return False
