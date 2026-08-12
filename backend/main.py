@@ -20,9 +20,27 @@ app = FastAPI(
     version="0.7.0",
 )
 
+# CORS configuration - supports both local development and production
+def get_allowed_origins():
+    """Get allowed CORS origins based on environment."""
+    if settings.ENVIRONMENT == "production":
+        return [
+            "https://smart-financial-portfolio-tracker.vercel.app",
+            "https://www.smart-financial-portfolio-tracker.vercel.app",
+            settings.FRONTEND_URL,
+        ]
+    else:
+        return [
+            "http://localhost:5173",
+            "http://localhost:3000",
+            "http://127.0.0.1:5173",
+            "http://127.0.0.1:3000",
+            settings.FRONTEND_URL,
+        ]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=get_allowed_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

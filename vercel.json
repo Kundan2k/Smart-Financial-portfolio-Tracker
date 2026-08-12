@@ -1,0 +1,59 @@
+{
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "installCommand": "npm install",
+  "framework": "vite",
+  "regions": ["iad1"],
+  "python": {
+    "version": "3.11"
+  },
+  "functions": {
+    "api/index.py": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  },
+  "env": {
+    "VITE_API_URL": {
+      "description": "Backend API URL for frontend",
+      "placeholder": "https://smart-financial-portfolio-tracker.vercel.app/api"
+    },
+    "DATABASE_URL": {
+      "description": "Database connection string (PostgreSQL recommended for production)"
+    },
+    "SECRET_KEY": {
+      "description": "JWT secret key - generate with: python -c \"import secrets; print(secrets.token_urlsafe(32))\""
+    },
+    "ENVIRONMENT": {
+      "description": "Deployment environment",
+      "placeholder": "production"
+    },
+    "ALGORITHM": {
+      "description": "JWT algorithm",
+      "placeholder": "HS256"
+    },
+    "ACCESS_TOKEN_EXPIRE_MINUTES": {
+      "description": "JWT token expiration in minutes",
+      "placeholder": "30"
+    },
+    "FRONTEND_URL": {
+      "description": "Frontend URL for CORS configuration",
+      "placeholder": "https://smart-financial-portfolio-tracker.vercel.app"
+    }
+  },
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api/index.py"
+    }
+  ]
+}
+
