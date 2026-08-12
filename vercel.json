@@ -1,8 +1,4 @@
 {
-  "buildCommand": "cd frontend && npm install && npm run build",
-  "outputDirectory": "frontend/dist",
-  "installCommand": "npm install",
-  "framework": "vite",
   "regions": ["iad1"],
   "functions": {
     "api/index.py": {
@@ -25,4 +21,5 @@
     }
   ]
 }
+
 
