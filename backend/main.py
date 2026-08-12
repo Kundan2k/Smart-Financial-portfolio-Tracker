@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import os
 
 from config import settings
 from db import check_db_connection
@@ -12,7 +13,18 @@ from routers import (
     fraud_router,
 )
 
-Base.metadata.create_all(bind=engine)
+# Only initialize database if DATABASE_URL is properly set
+if settings.DATABASE_URL and settings.DATABASE_URL != "sqlite:///./test.db":
+    try:
+        Base.metadata.create_all(bind=engine)
+    except Exception as e:
+        print(f"Warning: Could not initialize database: {e}")
+else:
+    # For development/testing with SQLite
+    try:
+        Base.metadata.create_all(bind=engine)
+    except Exception as e:
+        print(f"Warning: Could not initialize SQLite database: {e}")
 
 app = FastAPI(
     title="Portfolio Tracker API",
