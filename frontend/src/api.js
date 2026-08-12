@@ -1,9 +1,9 @@
 import axios from 'axios'
 
 // Use environment variable for API URL
-// In production: https://smart-financial-portfolio-tracker-c.vercel.app
-// In development: http://localhost:8000
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://smart-financial-portfolio-tracker-c.vercel.app'
+// In production: https://smart-financial-portfolio-tracker-c.vercel.app/api
+// In development: http://localhost:8000/api
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://smart-financial-portfolio-tracker-c.vercel.app/api'
 
 console.log('API Base URL:', API_BASE_URL)
 console.log('VITE_API_URL env:', import.meta.env.VITE_API_URL)
