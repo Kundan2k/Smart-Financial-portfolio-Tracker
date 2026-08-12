@@ -82,7 +82,7 @@ def get_allowed_origins():
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=get_allowed_origins(),
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -107,6 +107,12 @@ try:
     logger.info("All routers registered successfully")
 except Exception as e:
     logger.warning(f"Could not register some routers: {e}")
+
+
+@app.options("/{full_path:path}")
+async def preflight_handler(full_path: str):
+    """Handle CORS preflight requests."""
+    return {"status": "ok"}
 
 
 @app.get("/api/health", tags=["health"])
