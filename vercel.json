@@ -4,9 +4,6 @@
   "installCommand": "npm install",
   "framework": "vite",
   "regions": ["iad1"],
-  "python": {
-    "version": "3.11"
-  },
   "functions": {
     "api/index.py": {
       "memory": 1024,
