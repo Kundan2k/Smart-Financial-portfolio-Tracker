@@ -71,6 +71,7 @@ def get_allowed_origins():
         return [
             "https://smart-financial-portfolio-tracker.vercel.app",
             "https://www.smart-financial-portfolio-tracker.vercel.app",
+            "https://smart-financial-portfolio-tracker-c.vercel.app",
             settings.FRONTEND_URL,
         ]
     else:
