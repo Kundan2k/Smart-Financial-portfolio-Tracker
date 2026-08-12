@@ -1,6 +1,14 @@
 import axios from 'axios'
 
-const api = axios.create({ baseURL: '/api' })
+// Use environment variable for API URL, fallback to /api for local dev
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api'
+
+const api = axios.create({ 
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  }
+})
 
 // Attach access token to every request
 api.interceptors.request.use(config => {
@@ -18,7 +26,11 @@ api.interceptors.response.use(
       original._retry = true
       try {
         const refresh = localStorage.getItem('refresh_token')
-        const { data } = await axios.post('/api/auth/refresh', { refresh_token: refresh })
+        // Use full URL for refresh endpoint if API_BASE_URL is external
+        const refreshUrl = API_BASE_URL.startsWith('http') 
+          ? `${API_BASE_URL}/auth/refresh`
+          : '/api/auth/refresh'
+        const { data } = await axios.post(refreshUrl, { refresh_token: refresh })
         localStorage.setItem('access_token', data.access_token)
         localStorage.setItem('refresh_token', data.refresh_token)
         original.headers.Authorization = `Bearer ${data.access_token}`
