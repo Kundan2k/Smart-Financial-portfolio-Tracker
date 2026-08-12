@@ -26,8 +26,11 @@ try:
         investments_router, ml_router,
         fraud_router,
     )
+    logger.info("Successfully imported all routers")
 except Exception as e:
-    logger.warning(f"Could not import routers: {e}")
+    logger.error(f"Failed to import routers: {e}")
+    import traceback
+    logger.error(traceback.format_exc())
     portfolio_router = auth_router = expenses_router = None
     analytics_router = investments_router = ml_router = None
     fraud_router = None
@@ -92,21 +95,32 @@ app.add_middleware(
 try:
     if auth_router:
         app.include_router(auth_router, prefix="/api")
+        logger.info("✓ Auth router registered at /api")
+    else:
+        logger.error("✗ Auth router is None")
     if expenses_router:
         app.include_router(expenses_router, prefix="/api")
+        logger.info("✓ Expenses router registered at /api")
     if analytics_router:
         app.include_router(analytics_router, prefix="/api")
+        logger.info("✓ Analytics router registered at /api")
     if investments_router:
         app.include_router(investments_router, prefix="/api")
+        logger.info("✓ Investments router registered at /api")
     if ml_router:
         app.include_router(ml_router, prefix="/api")
+        logger.info("✓ ML router registered at /api")
     if fraud_router:
         app.include_router(fraud_router, prefix="/api")
+        logger.info("✓ Fraud router registered at /api")
     if portfolio_router:
         app.include_router(portfolio_router, prefix="/api")
+        logger.info("✓ Portfolio router registered at /api")
     logger.info("All routers registered successfully")
 except Exception as e:
-    logger.warning(f"Could not register some routers: {e}")
+    logger.error(f"Could not register some routers: {e}")
+    import traceback
+    logger.error(traceback.format_exc())
 
 
 @app.options("/{full_path:path}")
@@ -129,6 +143,19 @@ def health_check():
         "environment": settings.ENVIRONMENT,
         "database": "connected" if db_ok else "unreachable",
     }
+
+
+@app.get("/api/routes", tags=["debug"])
+def list_routes():
+    """List all available API routes."""
+    routes = []
+    for route in app.routes:
+        if hasattr(route, "path") and hasattr(route, "methods"):
+            routes.append({
+                "path": route.path,
+                "methods": list(route.methods) if route.methods else ["GET"]
+            })
+    return {"routes": routes}
 
 
 @app.get("/", tags=["root"])
