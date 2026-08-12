@@ -3,11 +3,13 @@
 ## Pre-Deployment Setup
 
 ### 1. Repository & Git
+
 - [ ] Push all changes to GitHub
 - [ ] Ensure `.gitignore` is properly configured
 - [ ] Remove any sensitive files (`.env`, `.env.local`, etc.)
 
 ### 2. Environment Configuration
+
 - [ ] Copy `.env.example` to `.env` for local development
 - [ ] Generate a strong `SECRET_KEY`:
   ```bash
@@ -16,12 +18,14 @@
 - [ ] Update all configuration values in `.env`
 
 ### 3. Frontend Setup
+
 - [ ] Frontend `package.json` has build script
 - [ ] Vite configuration is correct (`frontend/vite.config.js`)
 - [ ] Frontend environment variables are set (`.env.example`)
 - [ ] API calls use `VITE_API_URL` environment variable
 
 ### 4. Backend Setup
+
 - [ ] `backend/requirements.txt` is up to date
 - [ ] `api/requirements.txt` has all dependencies
 - [ ] `api/index.py` correctly imports FastAPI app
@@ -29,6 +33,7 @@
 - [ ] CORS is configured for production domains
 
 ### 5. Database
+
 - [ ] Choose database option:
   - [ ] SQLite (simple, single-instance only)
   - [ ] PostgreSQL on Railway/Neon (recommended for production)
@@ -38,6 +43,7 @@
 ## Vercel Deployment
 
 ### Step 1: Connect Project
+
 - [ ] Go to https://vercel.com/dashboard
 - [ ] Click "Add New..." → "Project"
 - [ ] Select "Import Git Repository"
@@ -46,6 +52,7 @@
 - [ ] Vercel auto-detects from `vercel.json`
 
 ### Step 2: Configure Environment Variables
+
 In Vercel Dashboard → Settings → Environment Variables, add:
 
 ```
@@ -61,6 +68,7 @@ API_URL = https://your-project.vercel.app/api
 ```
 
 ### Step 3: Deploy
+
 - [ ] Click "Deploy"
 - [ ] Monitor build logs
 - [ ] Verify deployment succeeds
@@ -68,6 +76,7 @@ API_URL = https://your-project.vercel.app/api
 ## Post-Deployment Verification
 
 ### Health Checks
+
 ```bash
 # Frontend
 curl https://your-project.vercel.app
@@ -80,6 +89,7 @@ vercel logs <your-project.vercel.app>
 ```
 
 ### Testing
+
 - [ ] Frontend loads and renders correctly
 - [ ] API endpoints respond
 - [ ] Database connection works
@@ -87,6 +97,7 @@ vercel logs <your-project.vercel.app>
 - [ ] CORS headers are correct
 
 ### Monitoring
+
 - [ ] Set up Vercel Analytics
 - [ ] Enable Vercel Logs
 - [ ] Configure error tracking (Sentry, Datadog, etc.)
@@ -119,6 +130,7 @@ DATABASE_URL=sqlite:///./test.db
 ```
 
 ⚠️ **Limitations:**
+
 - Single concurrent user
 - No persistence across deployments
 - Not suitable for production
@@ -126,29 +138,34 @@ DATABASE_URL=sqlite:///./test.db
 ## Troubleshooting
 
 ### Build Fails
+
 - Check build logs in Vercel dashboard
 - Verify `package.json` has all dependencies
 - Ensure Node.js version compatibility
 - Check for syntax errors in JavaScript/Python
 
 ### API Not Responding
+
 - Verify `api/index.py` exists
 - Check `vercel.json` rewrites configuration
 - Ensure backend dependencies in `api/requirements.txt`
 - View function logs: `vercel logs <url> --tail`
 
 ### CORS Errors
+
 - Update `FRONTEND_URL` in Vercel environment
 - Check CORS origins in `backend/main.py`
 - Verify API URL in frontend matches Vercel deployment
 
 ### Database Connection Fails
+
 - Verify `DATABASE_URL` is correct
 - Test connection locally first
 - Check PostgreSQL IP whitelist
 - Ensure database credentials are correct
 
 ### Environment Variables Not Loading
+
 - Redeploy after setting environment variables
 - Check variable names match exactly
 - Verify they're in correct environment (Production/Preview)
@@ -171,15 +188,18 @@ DATABASE_URL=sqlite:///./test.db
 ## Maintenance
 
 ### Regular Updates
+
 - [ ] Update npm dependencies: `npm audit fix`
 - [ ] Update Python dependencies: `pip list --outdated`
 - [ ] Monitor security advisories
 
 ### Backups
+
 - [ ] PostgreSQL: Enable Railway backups
 - [ ] Database exports: Weekly backups
 
 ### Monitoring & Logs
+
 - [ ] Check Vercel Analytics
 - [ ] Review error logs regularly
 - [ ] Set up alerts for failures

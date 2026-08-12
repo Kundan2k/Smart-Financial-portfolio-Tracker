@@ -20,7 +20,7 @@ This guide explains how to deploy the Smart Financial Portfolio Tracker to Verce
 Update `frontend/src/api.js` to use environment variable for API URL:
 
 ```javascript
-const API_URL = import.meta.env.VITE_API_URL || '/api';
+const API_URL = import.meta.env.VITE_API_URL || "/api";
 ```
 
 ### Configure CORS in Backend
@@ -65,11 +65,13 @@ ACCESS_TOKEN_EXPIRE_MINUTES=30
 ### Database Setup Options
 
 **Option A: PostgreSQL on Railway/Neon** (Recommended)
+
 - Sign up at https://railway.app or https://neon.tech
 - Create a PostgreSQL database
 - Use connection string in `DATABASE_URL`
 
 **Option B: SQLite** (Simpler, limited)
+
 - Uses `sqlite:///./test.db` (stored on filesystem)
 - Good for testing, not recommended for production
 
@@ -111,21 +113,26 @@ def run_migrations():
 ## Troubleshooting
 
 ### Logs
+
 View real-time logs in Vercel Dashboard or CLI:
+
 ```bash
 vercel logs <deployment-url>
 ```
 
 ### CORS Issues
+
 - Ensure CORS is configured with your Vercel domain
 - Check `Access-Control-Allow-Origin` headers
 
 ### Database Connection
+
 - Verify `DATABASE_URL` environment variable is set
 - For PostgreSQL, ensure your IP/firewall allows Vercel IPs
 - Check database credentials
 
 ### Python Import Errors
+
 - Ensure `backend/` is added to `sys.path` in `api/index.py`
 - All dependencies in `api/requirements.txt` match `backend/requirements.txt`
 
@@ -169,6 +176,7 @@ npm run dev
 ## CI/CD Pipeline
 
 Vercel automatically:
+
 - ✅ Builds on every push to main
 - ✅ Runs preview deployments for PRs
 - ✅ Deploys to production on merge

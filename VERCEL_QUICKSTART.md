@@ -5,16 +5,19 @@
 Your project is now configured for Vercel deployment with:
 
 ✅ **Frontend** (React + Vite)
+
 - Auto-deployed to Vercel's global CDN
 - Environment variables support
 - Optimized production build
 
 ✅ **Backend** (Python FastAPI)
+
 - Deployed as Vercel serverless functions
 - Python 3.11 runtime
 - Auto-scaling, no server management
 
 ✅ **Configuration Files**
+
 - `vercel.json` - Deployment configuration
 - `api/index.py` - Serverless function entry point
 - `backend/config.py` - Environment-based configuration
@@ -27,6 +30,7 @@ Your project is now configured for Vercel deployment with:
 ### 1. Set Up Environment Variables
 
 Copy environment examples:
+
 ```bash
 cp .env.example .env
 cp backend/.env.example backend/.env
@@ -34,6 +38,7 @@ cp frontend/.env.example frontend/.env
 ```
 
 Update `.env` with your values:
+
 ```bash
 # Generate a strong secret
 python -c "import secrets; print(secrets.token_urlsafe(32))"
@@ -77,6 +82,7 @@ Visit `http://localhost:5173` in your browser.
 ## Deploy to Vercel (5 Steps)
 
 ### Step 1: Push to GitHub
+
 ```bash
 git add .
 git commit -m "Setup Vercel deployment"
@@ -84,11 +90,13 @@ git push origin main
 ```
 
 ### Step 2: Create Vercel Account
+
 - Go to https://vercel.com
 - Sign up with GitHub
 - Authorize Vercel
 
 ### Step 3: Import Project
+
 1. Visit https://vercel.com/dashboard
 2. Click "Add New..." → "Project"
 3. Select "Import Git Repository"
@@ -96,19 +104,21 @@ git push origin main
 5. Click "Import"
 
 ### Step 4: Add Environment Variables
+
 In the Vercel dashboard, go to **Settings** → **Environment Variables** and add:
 
-| Variable | Value | Notes |
-|----------|-------|-------|
-| `VITE_API_URL` | `https://your-project.vercel.app/api` | Set after first deployment |
-| `DATABASE_URL` | `sqlite:///./test.db` | Or PostgreSQL connection string |
-| `SECRET_KEY` | Generate strong key | Use: `python -c "import secrets; print(secrets.token_urlsafe(32))"` |
-| `ENVIRONMENT` | `production` | |
-| `ALGORITHM` | `HS256` | |
-| `ACCESS_TOKEN_EXPIRE_MINUTES` | `30` | |
-| `FRONTEND_URL` | `https://your-project.vercel.app` | Update with your Vercel URL |
+| Variable                      | Value                                 | Notes                                                               |
+| ----------------------------- | ------------------------------------- | ------------------------------------------------------------------- |
+| `VITE_API_URL`                | `https://your-project.vercel.app/api` | Set after first deployment                                          |
+| `DATABASE_URL`                | `sqlite:///./test.db`                 | Or PostgreSQL connection string                                     |
+| `SECRET_KEY`                  | Generate strong key                   | Use: `python -c "import secrets; print(secrets.token_urlsafe(32))"` |
+| `ENVIRONMENT`                 | `production`                          |                                                                     |
+| `ALGORITHM`                   | `HS256`                               |                                                                     |
+| `ACCESS_TOKEN_EXPIRE_MINUTES` | `30`                                  |                                                                     |
+| `FRONTEND_URL`                | `https://your-project.vercel.app`     | Update with your Vercel URL                                         |
 
 ### Step 5: Deploy
+
 1. Click "Deploy"
 2. Wait for build to complete (~2-3 minutes)
 3. Get your Vercel URL (e.g., `https://smart-portfolio-tracker-xyz.vercel.app`)
@@ -133,14 +143,17 @@ curl https://your-project.vercel.app/api/health
 ## Database Setup (Choose One)
 
 ### Option A: Simple SQLite (Development Only)
+
 ```bash
 DATABASE_URL=sqlite:///./test.db
 ```
+
 ⚠️ Not recommended for production (no persistence across deployments)
 
 ### Option B: PostgreSQL on Railway (Recommended)
 
 1. **Create Railway Account**
+
    ```
    https://railway.app → Sign up
    ```
@@ -202,6 +215,7 @@ DATABASE_URL=sqlite:///./test.db
 ### Update Backend CORS Origins
 
 Edit `backend/main.py`:
+
 ```python
 def get_allowed_origins():
     """Get allowed CORS origins based on environment."""
@@ -223,6 +237,7 @@ def get_allowed_origins():
 ### Update Frontend API URL
 
 Edit `frontend/.env.production.example`:
+
 ```
 VITE_API_URL=https://your-vercel-project.vercel.app/api
 ```
@@ -243,6 +258,7 @@ VITE_API_URL=https://your-vercel-project.vercel.app/api
 ## Troubleshooting
 
 ### ❌ Build Fails
+
 ```bash
 # Check logs in Vercel dashboard
 # Verify dependencies:
@@ -252,30 +268,38 @@ cd ../backend && pip list
 ```
 
 ### ❌ API Returns 503
+
 - Check `api/index.py` exists
 - Verify `vercel.json` rewrites configuration
 - View function logs: `vercel logs --tail`
 
 ### ❌ CORS Errors
+
 ```javascript
-// Frontend sees: 
+// Frontend sees:
 // Access to XMLHttpRequest blocked by CORS policy
 ```
+
 Solution:
+
 - Update `FRONTEND_URL` in Vercel environment
 - Add domain to `backend/main.py` CORS origins
 - Redeploy
 
 ### ❌ Database Connection Error
+
 ```
 psycopg2.OperationalError: could not connect to server
 ```
+
 Solution:
+
 - Verify `DATABASE_URL` is correct
 - For PostgreSQL: Check IP whitelist in database settings
 - Test connection locally first
 
 ### ❌ Environment Variables Not Applied
+
 - Environment variables need redeploy to take effect
 - After updating in dashboard, trigger redeploy:
   ```bash
@@ -288,29 +312,34 @@ Solution:
 ## Next Steps
 
 ### 1. **Monitor Your Deployment**
-   - Enable Vercel Analytics
-   - Set up error tracking (Sentry, LogRocket)
-   - Configure uptime monitoring
+
+- Enable Vercel Analytics
+- Set up error tracking (Sentry, LogRocket)
+- Configure uptime monitoring
 
 ### 2. **Set Up CI/CD**
-   - Vercel auto-deploys on `git push`
-   - Configure preview deployments for PRs
-   - Set up branch protection rules
+
+- Vercel auto-deploys on `git push`
+- Configure preview deployments for PRs
+- Set up branch protection rules
 
 ### 3. **Database Backups**
-   - If using PostgreSQL, enable automated backups
-   - Set up regular exports
+
+- If using PostgreSQL, enable automated backups
+- Set up regular exports
 
 ### 4. **Security**
-   - Use strong `SECRET_KEY`
-   - Enable HTTPS (automatic with Vercel)
-   - Keep dependencies updated
-   - Run `npm audit` and `pip audit` regularly
+
+- Use strong `SECRET_KEY`
+- Enable HTTPS (automatic with Vercel)
+- Keep dependencies updated
+- Run `npm audit` and `pip audit` regularly
 
 ### 5. **Performance**
-   - Use Vercel Analytics
-   - Optimize images in frontend
-   - Consider caching strategies for API responses
+
+- Use Vercel Analytics
+- Optimize images in frontend
+- Consider caching strategies for API responses
 
 ---
 
